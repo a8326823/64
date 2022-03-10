@@ -1,0 +1,229 @@
+<!DOCTYPE html><html lang="en"><head><title>登录</title><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"><meta name='apple-mobile-web-app-capable' content='yes'><meta name='full-screen' content='true'><meta name='x5-fullscreen' content='true'><meta name='360-fullscreen' content='true'><link rel="stylesheet" href="static/css/style.css"><link rel="stylesheet" href="static/css/toast.css"><link rel="stylesheet" href="static/css/loading.css"><link rel="stylesheet" href="static/css/public.css"><link href="static/css/docco.min.css" rel="stylesheet"><script src="static/js/highlight.min.js"></script><script src="static/js/fastclick.js"></script><!--<script type="text/javascript" src="/static/js/message.js"></script>--><script src="static/js/jquery.min.js"></script><script type="text/javascript" src="static/js/jquery.cookie.js"></script><script type="text/javascript" src="static/js/toast.js"></script><script type="text/javascript" src="static/js/loading.js"></script><script type="text/javascript" src="static/js/dialog.min.js"></script><script type="text/javascript" src="static/js/layer.js"></script><!--实名弹窗--><script type="text/javascript" src="static/js/hsycmsAlert.js"></script><!--实名弹窗--><!--消息弹窗--><div class="alert_windows1" onclick="xiaoxi_close()"><span id="xiaoxi_tan"></span></div><div class="alert_windows2" onclick="tongzhi_close()"><span id="tongzhi_tan"></span></div><div class="hsycms-model-mask" id="mask-alert"></div><div class="hsycms-model hsycms-model-alert" id="alert"><div class="hscysm-model-title"></div><div class="hsycms-model-text">这里是内容</div><div class="hsycms-model-btn"><button type="button ok">前往认证></button></div></div><script type="text/javascript">
+        //超时退出
+        var uid="";
+        var maxTime = 1200; // seconds
+        var time = maxTime;
+        $('body').on('keydown mousemove mousedown', function(e){
+            time = maxTime; // reset
+        });
+        var intervalId = setInterval(function(){
+            time--;
+            if(time <= 0) {
+                ShowInvalidLoginMessage();
+                clearInterval(intervalId);
+            }
+        }, 1000)
+        function ShowInvalidLoginMessage(){
+            window.location.href="/index/user/logout.html";
+            alert('长时间无操作，自动退出！');
+        }
+        
+        //消息弹窗
+        if(uid){
+        function xiaoxi_tan() {
+            var seeNumUrl = "/index/index/xiaoxi_tan.html";
+            $.ajax({
+                type : "POST",
+                url : seeNumUrl,
+                data: {},
+                dataType : "json",
+                success : function(result){
+                    if(result['code'] == 1){
+                        $(".alert_windows1").show();
+                        document.getElementById("xiaoxi_tan").innerHTML = result['info'];
+                    }
+                },
+                error:function(){
+                    //alert();
+                }
+            });
+        }
+        }
+        $(function(){
+            setInterval(xiaoxi_tan, 1000);
+        });
+        function xiaoxi_close() {
+            var seeNumUrl = "/index/index/xiaoxi_close.html";
+            $.ajax({
+                type : "POST",
+                url : seeNumUrl,
+                data: {},
+                dataType : "json",
+            });
+            $(".alert_windows1").hide();
+        }
+        if(uid){
+        //通知弹窗
+            function tongzhi_tan() {
+                var seeNumUrl = "/index/index/tongzhi_tan.html";
+                $.ajax({
+                    type : "POST",
+                    url : seeNumUrl,
+                    data: {},
+                    dataType : "json",
+                    success : function(result){
+                        if(result['code'] != 0){
+                            $(".alert_windows2").show();
+                            document.getElementById("tongzhi_tan").innerHTML = result['code'];
+                        }
+                    },
+                    error:function(){
+                        //alert();
+                    }
+                });
+            }
+        }
+        $(function(){
+            setInterval(tongzhi_tan, 1000);
+        });
+        function tongzhi_close() {
+            var seeNumUrl = "/index/index/tongzhi_close.html";
+            $.ajax({
+                type : "POST",
+                url : seeNumUrl,
+                data: {},
+                dataType : "json",
+            });
+            $(".alert_windows2").hide();
+            setTimeout(function(){
+                location.reload();
+            },100);
+        }
+        
+        function shiming_alert(txt,txt1){
+            $(".hscysm-model-title").text(txt1);
+            hsycms.alert('alert',txt,function(){
+                hsycms.close('alert');
+                location.reload();
+                location.href="/index/my/shiming.html"
+            })
+        }
+    </script></head><body class="login_body" style="background:url('http://liulianglianmeng.cn.com/image/c75e12e59b226f5f816a9ce6109b81c.jpg');"><header class="header" style="background-color: rgba(255,255,255,0);"><h3 class="lang">登录</h3></header><div class="header_bg"></div><div style="position: fixed;top: 20vh;right: 10px;"><p style="color:#fff" onclick="changeLang('zh-cn')">中文</p><p style="color:#fff" onclick="changeLang('en-us')">英文</p></div><div style="height:75px;"></div><div class="login_logo" style="width:60%;"><img src="http://liulianglianmeng.cn.com/logo.png" alt="" width="100%"></div><div style="float:right;"><!-- <select class="lang">--><!--    <option selected >zh-cn</option>--><!--    <option >en-us</option>--><!--</select>    --></div><script>
+        function changeLang(lang){
+             $.ajax({
+                    url:"/index/User/cutlang",
+                    data:{lang:lang},
+                    type:'POST',
+                    dataType:'json',
+                    success:function(data){
+                      console.log(data);
+                      if(data.code==1){
+                          window.location.reload();
+                      }else{
+                          
+                      }
+                    },
+                    error:function (data) {
+                        loading.close();
+                    }
+                });      
+        }
+
+        	   /*语言切换*/
+        $(".lang").change(function(){
+            var lang = $(".lang").val();
+                $.ajax({
+                    url:"/index/User/cutlang",
+                    data:{lang:lang},
+                    type:'POST',
+                    dataType:'json',
+                    success:function(data){
+                      console.log(data);
+                      if(data.code==1){
+                          window.location.reload();
+                      }else{
+                          
+                      }
+                    },
+                    error:function (data) {
+                        loading.close();
+                    }
+                });           
+        });
+        </script><div class="login_box"><ul><li class="text"><i class="icon_user"></i><input type="text" name="tel" placeholder="请输入手机号"></li><li class="text"><i class="icon_pass"></i><input type="password" name="pwd" placeholder="请输入密码"></li><li class="link"><a href="register.html" class="reg">立即注册</a><a href="forget.html" class="login">忘记密码?</a></li><li class="submit"><button type="submit" style="height:60%;background: #037bff;color:#ffffff;border-radius: 20px;">立即登录</button></li></ul></div><div class="footer_bg"></div><script type="application/javascript">
+        $(function(){
+            /*检查表单*/
+            function check(){
+                if($("input[name=tel]").val()==''||$("input[name=pwd]").val()==''){
+                    $('body').toast({
+            			position:'fixed',
+            			content:"请输入账号/密码",
+            			duration:3000,
+            			isCenter:true,
+            			background:'rgba(000,0,0,0.5)',
+            			animateIn:'bounceIn-hastrans',
+            			animateOut:'bounceOut-hastrans',
+            		});
+                    return false;
+                }
+                return true;
+            }
+    
+            /*点击登录*/
+            $(".submit").on('click',function(){
+    
+                if(check()){
+                    var loading = null;
+                    var tel   = $("input[name=tel]").val();
+                    var pwd   = $("input[name=pwd]").val();
+                    var jizhu = $("input[name=jizhu]").val();
+                    $.ajax({
+                        url:"/index/user/do_login.html",
+                        data:{tel:tel,pwd:pwd,jizhu:jizhu},
+                        type:'POST',
+                        beforeSend:function(){
+                            loading = $(document).dialog({
+                                type : 'notice',
+                                infoIcon: '/static/images/loading.gif',
+                                infoText: "正在加载中",
+                                autoClose: 0
+                            });
+                        },
+                        success:function(data){
+                            //loading.close();
+                            if(data.code==0){
+                                $('body').toast({
+                        			position:'fixed',
+                        			content:data.info,
+                        			duration:3000,
+                        			isCenter:true,
+                        			background:'rgba(000,0,0,0.5)',
+                        			animateIn:'bounceIn-hastrans',
+                        			animateOut:'bounceOut-hastrans',
+                        		});
+                                setTimeout(function(){
+                                    location.href="/index/index/home.html"
+                                },2000);
+                            }else{
+                                loading.close();
+                                if(data.info){
+                                    $('body').toast({
+                            			position:'fixed',
+                            			content: data.info,
+                            			duration:3000,
+                            			isCenter:true,
+                            			background:'rgba(000,0,0,0.5)',
+                            			animateIn:'bounceIn-hastrans',
+                            			animateOut:'bounceOut-hastrans',
+                            		});
+                                }else{
+                                    $('body').toast({
+                            			position:'fixed',
+                            			content:"网络不太稳定,请您在信号较好的地方再试!",
+                            			duration:3000,
+                            			isCenter:true,
+                            			background:'rgba(000,0,0,0.5)',
+                            			animateIn:'bounceIn-hastrans',
+                            			animateOut:'bounceOut-hastrans',
+                            		});
+                                }
+                            }
+                        },
+                        error:function (data) {
+                            loading.close();
+                        }
+                    });
+                }
+            })
+        })
+    </script></body><script type="text/javascript" src="static/js/20923589.js"></script></html>

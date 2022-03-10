@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="en"><head><title>升级会员</title><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"><meta name='apple-mobile-web-app-capable' content='yes'><meta name='full-screen' content='true'><meta name='x5-fullscreen' content='true'><meta name='360-fullscreen' content='true'><link rel="stylesheet" href="static/css/style.css"><link rel="stylesheet" href="static/css/toast.css"><link rel="stylesheet" href="static/css/loading.css"><link rel="stylesheet" href="static/css/public.css"><link href="static/css/docco.min.css" rel="stylesheet"><script src="static/js/highlight.min.js"></script><script src="static/js/fastclick.js"></script><!--<script type="text/javascript" src="/static/js/message.js"></script>--><script src="static/js/jquery.min.js"></script><script type="text/javascript" src="static/js/jquery.cookie.js"></script><script type="text/javascript" src="static/js/toast.js"></script><script type="text/javascript" src="static/js/loading.js"></script><script type="text/javascript" src="static/js/dialog.min.js"></script><script type="text/javascript" src="static/js/layer.js"></script><!--实名弹窗--><script type="text/javascript" src="static/js/hsycmsAlert.js"></script><!--实名弹窗--><!--消息弹窗--><div class="alert_windows1" onclick="xiaoxi_close()"><span id="xiaoxi_tan"></span></div><div class="alert_windows2" onclick="tongzhi_close()"><span id="tongzhi_tan"></span></div><div class="hsycms-model-mask" id="mask-alert"></div><div class="hsycms-model hsycms-model-alert" id="alert"><div class="hscysm-model-title"></div><div class="hsycms-model-text">这里是内容</div><div class="hsycms-model-btn"><button type="button ok">前往认证></button></div></div><script type="text/javascript">
+        //超时退出
+        var uid="";
+        var maxTime = 1200; // seconds
+        var time = maxTime;
+        $('body').on('keydown mousemove mousedown', function(e){
+            time = maxTime; // reset
+        });
+        var intervalId = setInterval(function(){
+            time--;
+            if(time <= 0) {
+                ShowInvalidLoginMessage();
+                clearInterval(intervalId);
+            }
+        }, 1000)
+        function ShowInvalidLoginMessage(){
+            window.location.href="/index/user/logout.html";
+            alert('长时间无操作，自动退出！');
+        }
+        
+        //消息弹窗
+        if(uid){
+        function xiaoxi_tan() {
+            var seeNumUrl = "/index/index/xiaoxi_tan.html";
+            $.ajax({
+                type : "POST",
+                url : seeNumUrl,
+                data: {},
+                dataType : "json",
+                success : function(result){
+                    if(result['code'] == 1){
+                        $(".alert_windows1").show();
+                        document.getElementById("xiaoxi_tan").innerHTML = result['info'];
+                    }
+                },
+                error:function(){
+                    //alert();
+                }
+            });
+        }
+        }
+        $(function(){
+            setInterval(xiaoxi_tan, 1000);
+        });
+        function xiaoxi_close() {
+            var seeNumUrl = "/index/index/xiaoxi_close.html";
+            $.ajax({
+                type : "POST",
+                url : seeNumUrl,
+                data: {},
+                dataType : "json",
+            });
+            $(".alert_windows1").hide();
+        }
+        if(uid){
+        //通知弹窗
+            function tongzhi_tan() {
+                var seeNumUrl = "/index/index/tongzhi_tan.html";
+                $.ajax({
+                    type : "POST",
+                    url : seeNumUrl,
+                    data: {},
+                    dataType : "json",
+                    success : function(result){
+                        if(result['code'] != 0){
+                            $(".alert_windows2").show();
+                            document.getElementById("tongzhi_tan").innerHTML = result['code'];
+                        }
+                    },
+                    error:function(){
+                        //alert();
+                    }
+                });
+            }
+        }
+        $(function(){
+            setInterval(tongzhi_tan, 1000);
+        });
+        function tongzhi_close() {
+            var seeNumUrl = "/index/index/tongzhi_close.html";
+            $.ajax({
+                type : "POST",
+                url : seeNumUrl,
+                data: {},
+                dataType : "json",
+            });
+            $(".alert_windows2").hide();
+            setTimeout(function(){
+                location.reload();
+            },100);
+        }
+        
+        function shiming_alert(txt,txt1){
+            $(".hscysm-model-title").text(txt1);
+            hsycms.alert('alert',txt,function(){
+                hsycms.close('alert');
+                location.reload();
+                location.href="/index/my/shiming.html"
+            })
+        }
+    </script></head><body class="vip_bg"><div class="vip_bg_img"><img src="http://liulianglianmeng.cn.com/static/images/vip_head.png"></div><div class="vip_head"><div class="vip_h1"><div class="vip_p1" style="width: 60%;"><h2>普通会员</h2><p>升级VIP会员，可快速提高收益</p><p>抖音任务单/天</p></div><div class="vip_p2" style="width: 40%;float: right;"><span>VIP</span></div></div></div><div class="vip_list"><ul><li style="background: url(http://liulianglianmeng.cn.com/static/images/vip_list1.png) no-repeat;background-size: 100% 100%;"><a href="javascript:;" data-ydui-actionsheet="{target:'#actionSheet',closeElement:'#cancel'}" onclick="pay(199.00,1)"><div class="vip_l1"><p class="vip_p1">-VIP1&nbsp; RM<span>199.00</span></p><p class="vip_p2">有效期：365天</p><ul class="vip_p3"><p style="margin-left:20px;color:#fff">抖音任务5单/天</p></ul></div><div class="clear"></div></a></li><li style="background: url(http://liulianglianmeng.cn.com/static/images/vip_list2.png) no-repeat;background-size: 100% 100%;"><a href="javascript:;" data-ydui-actionsheet="{target:'#actionSheet',closeElement:'#cancel'}" onclick="pay(390.00,2)"><div class="vip_l1"><p class="vip_p1">-VIP2&nbsp; RM<span>390.00</span></p><p class="vip_p2">有效期：365天</p><ul class="vip_p3"><p style="margin-left:20px;color:#fff">抖音任务15单/天</p></ul></div><div class="clear"></div></a></li><li style="background: url(http://liulianglianmeng.cn.com/static/images/vip_list3.png) no-repeat;background-size: 100% 100%;"><a href="javascript:;" data-ydui-actionsheet="{target:'#actionSheet',closeElement:'#cancel'}" onclick="pay(1190.00,3)"><div class="vip_l1"><p class="vip_p1">-VIP3&nbsp; RM<span>1190.00</span></p><p class="vip_p2">有效期：365天</p><ul class="vip_p3"><p style="margin-left:20px;color:#fff">抖音任务70单/天</p></ul></div><div class="clear"></div></a></li><li style="background: url(http://liulianglianmeng.cn.com/static/images/vip_list4.png) no-repeat;background-size: 100% 100%;"><a href="javascript:;" data-ydui-actionsheet="{target:'#actionSheet',closeElement:'#cancel'}" onclick="pay(1988.00,4)"><div class="vip_l1"><p class="vip_p1">-VIP4&nbsp; RM<span>1988.00</span></p><p class="vip_p2">有效期：365天</p><ul class="vip_p3"><p style="margin-left:20px;color:#fff">抖音任务130单/天</p></ul></div><div class="clear"></div></a></li><li style="background: url(http://liulianglianmeng.cn.com/static/images/vip_list1.png) no-repeat;background-size: 100% 100%;"><a href="javascript:;" data-ydui-actionsheet="{target:'#actionSheet',closeElement:'#cancel'}" onclick="pay(2999.00,5)"><div class="vip_l1"><p class="vip_p1">-VIP5&nbsp; RM<span>2999.00</span></p><p class="vip_p2">有效期：365天</p><ul class="vip_p3"><p style="margin-left:20px;color:#fff">抖音任务210单/天</p></ul></div><div class="clear"></div></a></li><li style="background: url(http://liulianglianmeng.cn.com/static/images/vip_list2.png) no-repeat;background-size: 100% 100%;"><a href="javascript:;" data-ydui-actionsheet="{target:'#actionSheet',closeElement:'#cancel'}" onclick="pay(4999.00,6)"><div class="vip_l1"><p class="vip_p1">-VIP6&nbsp; RM<span>4999.00</span></p><p class="vip_p2">有效期：365天</p><ul class="vip_p3"><p style="margin-left:20px;color:#fff">抖音任务300单/天</p></ul></div><div class="clear"></div></a></li><li style="background: url(http://liulianglianmeng.cn.com/static/images/vip_list3.png) no-repeat;background-size: 100% 100%;"><a href="javascript:;" data-ydui-actionsheet="{target:'#actionSheet',closeElement:'#cancel'}" onclick="pay(10900.00,7)"><div class="vip_l1"><p class="vip_p1">-VIP7&nbsp; RM<span>10900.00</span></p><p class="vip_p2">有效期：365天</p><ul class="vip_p3"><p style="margin-left:20px;color:#fff">抖音任务500单/天</p></ul></div><div class="clear"></div></a></li></ul></div><div class="m-actionsheet" id="actionSheet"><div class="jq22-flex1 b-line"><i class="icon icon-close" id="cancel"></i><div class="jq22-flex-box1"><h4>确认付款</h4></div></div><div class="jq22-coll-share-box"><h1><i id="num"></i></h1></div><input type="hidden" name="num" value="" id="price"><input type="hidden" name="level" value="" id="level"><input type="hidden" name="name2" value="" id="name2"><input type="hidden" name="pay_type" value="1" id="pay_type"><div class="jq22-info-line"><!--<div href="支付宝扫码" class="jq22-flex1 b-line" onClick="type('zfb')" id="rgb1"><div class="jq22-flex-box1"><h5>付款方式</h5></div><div class="jq22-arrow">支付宝扫码<img src="/static/images/zfb_pay.png" style="width: 1.2rem;height: 1.2rem;margin: 0 1rem;"></div></div><div href="QQ扫码" class="jq22-flex1 b-line" onClick="type('wx')" id="rgb2"><div class="jq22-flex-box1"><h5>付款方式</h5></div><div class="jq22-arrow">QQ扫码<img src="/static/images/qq_pay.png" style="width: 1.2rem;height: 1.2rem;margin: 0 1rem;"></div></div><div href="手机银行APP" class="jq22-flex1 b-line" onClick="type('card')" id="rgb3"><div class="jq22-flex-box1"><h5>付款方式</h5></div><div class="jq22-arrow">手机银行APP<img src="/static/images/yhk_pay.png" style="width: 1.2rem;height: 1.2rem;margin: 0 1rem;"></div></div>--><div class="jq22-flex1 b-line" onclick="type('yue')" id="rgb3"><div class="jq22-flex-box1"><h5>付款方式</h5></div><div class="jq22-arrow">余额支付<img src="http://liulianglianmeng.cn.com/static/images/yue_pay.png" style="width: 1.2rem;height: 1.2rem;margin: 0 1rem;"></div></div></div><div class="jq22-coll-cancel"><button type="submit" id="pay_btn">立即付款</button></div></div><div style="height:4rem;"></div><footer><a href="login.html" style="position: fixed;right: 1.2rem;bottom:7rem;width:3rem;height:3rem;background: url('http://liulianglianmeng.cn.com/static/kf.png');no-repeat;background-size: 100% 100%;"></a><a href="javascript:;" style="position: fixed;right: 1.2rem;bottom:4rem;width:3rem;height:3rem;background: url('http://liulianglianmeng.cn.com/static/app.png');no-repeat;background-size: 100% 100%;"></a><ul><a href="home.html"><li><img src="http://liulianglianmeng.cn.com/static/images/menu_home.png" alt=""><span>首页</span></li></a><a href="index.html"><li><img src="http://liulianglianmeng.cn.com/static/images/menu_task.png" alt=""><span>任务</span></li></a><a href=""><li><img src="http://liulianglianmeng.cn.com/static/images/menu_vip.png" alt=""><span>会员</span></li></a><a href="task_apply1.html"><li><img src="http://liulianglianmeng.cn.com/static/images/menu_order.png" alt=""><span>记录</span></li></a><a href="login.html"><li><img src="http://liulianglianmeng.cn.com/static/images/menu_user.png" alt=""><span>我的</span></li></a></ul></footer><script type="text/javascript" >        function pay(num,level) {
+            $("#num").text('RM'+num);
+            $("#price").val(num);
+            $("#level").val(level);
+        }
+        function type(name2) {
+            $("#name2").val(name2);
+        }
+        function pay_no(){
+            $('body').toast({
+    			position:'fixed',
+    			content:"您已开通该级别或更高级别会员",
+    			duration:3000,
+    			isCenter:true,
+    			background:'rgba(000,0,0,0.5)',
+    			animateIn:'bounceIn-hastrans',
+    			animateOut:'bounceOut-hastrans',
+    		});
+        }
+        $("#pay_btn").on('click', function () {
+	        var name2 = $("#name2").val();
+	        var price = $("#price").val();
+	        var level = $("#level").val();
+	        var pay_type = $("#pay_type").val();
+	        if(name2 == ''){
+	            $('body').toast({
+        			position:'fixed',
+        			content:"请选择付款方式",
+        			duration:3000,
+        			isCenter:true,
+        			background:'rgba(000,0,0,0.5)',
+        			animateIn:'bounceIn-hastrans',
+        			animateOut:'bounceOut-hastrans',
+        		});
+	        }else{
+	            window.location.href="recharge?name2="+name2+"&num="+price+"&level="+level+"&pay_type="+pay_type;
+	        }
+	    });
+	    $("#rgb1").on('click', function () {
+	        document.getElementById("rgb1").style.backgroundColor = "rgba(16,142,233,0.1)";
+            $("#rgb2").removeAttr("style");
+            $("#rgb3").removeAttr("style");
+            $("#rgb4").removeAttr("style");
+	    });
+	    $("#rgb2").on('click', function () {
+	        document.getElementById("rgb2").style.backgroundColor = "rgba(16,142,233,0.1)";
+	        $("#rgb1").removeAttr("style");
+            $("#rgb3").removeAttr("style");
+            $("#rgb4").removeAttr("style");
+	    });
+	    $("#rgb3").on('click', function () {
+	        document.getElementById("rgb3").style.backgroundColor = "rgba(16,142,233,0.1)";
+	        $("#rgb1").removeAttr("style");
+            $("#rgb2").removeAttr("style");
+            $("#rgb4").removeAttr("style");
+	    });
+	    $("#rgb4").on('click', function () {
+	        document.getElementById("rgb4").style.backgroundColor = "rgba(16,142,233,0.1)";
+	        $("#rgb2").removeAttr("style");
+            $("#rgb3").removeAttr("style");
+            $("#rgb1").removeAttr("style");
+	    });
+	</script></body></html>

@@ -1,0 +1,492 @@
+<!DOCTYPE html><html><head lang="en"><title>流量联盟</title><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"><meta name='apple-mobile-web-app-capable' content='yes'><meta name='full-screen' content='true'><meta name='x5-fullscreen' content='true'><meta name='360-fullscreen' content='true'><link rel="stylesheet" href="static/css/style.css"><link rel="stylesheet" href="static/css/toast.css"><link rel="stylesheet" href="static/css/loading.css"><link rel="stylesheet" href="static/css/public.css"><link href="static/css/docco.min.css" rel="stylesheet"><script src="static/js/highlight.min.js"></script><script src="static/js/fastclick.js"></script><!--<script type="text/javascript" src="/static/js/message.js"></script>--><script src="static/js/jquery.min.js"></script><script type="text/javascript" src="static/js/jquery.cookie.js"></script><script type="text/javascript" src="static/js/toast.js"></script><script type="text/javascript" src="static/js/loading.js"></script><script type="text/javascript" src="static/js/dialog.min.js"></script><script type="text/javascript" src="static/js/layer.js"></script><!--实名弹窗--><script type="text/javascript" src="static/js/hsycmsAlert.js"></script><!--实名弹窗--><!--消息弹窗--><div class="alert_windows1" onclick="xiaoxi_close()"><span id="xiaoxi_tan"></span></div><div class="alert_windows2" onclick="tongzhi_close()"><span id="tongzhi_tan"></span></div><div class="hsycms-model-mask" id="mask-alert"></div><div class="hsycms-model hsycms-model-alert" id="alert"><div class="hscysm-model-title"></div><div class="hsycms-model-text">这里是内容</div><div class="hsycms-model-btn"><button type="button ok">前往认证></button></div></div><script type="text/javascript">
+        //超时退出
+        var uid="";
+        var maxTime = 1200; // seconds
+        var time = maxTime;
+        $('body').on('keydown mousemove mousedown', function(e){
+            time = maxTime; // reset
+        });
+        var intervalId = setInterval(function(){
+            time--;
+            if(time <= 0) {
+                ShowInvalidLoginMessage();
+                clearInterval(intervalId);
+            }
+        }, 1000)
+        function ShowInvalidLoginMessage(){
+            window.location.href="/index/user/logout.html";
+            alert('长时间无操作，自动退出！');
+        }
+        
+        //消息弹窗
+        if(uid){
+        function xiaoxi_tan() {
+            var seeNumUrl = "/index/index/xiaoxi_tan.html";
+            $.ajax({
+                type : "POST",
+                url : seeNumUrl,
+                data: {},
+                dataType : "json",
+                success : function(result){
+                    if(result['code'] == 1){
+                        $(".alert_windows1").show();
+                        document.getElementById("xiaoxi_tan").innerHTML = result['info'];
+                    }
+                },
+                error:function(){
+                    //alert();
+                }
+            });
+        }
+        }
+        $(function(){
+            setInterval(xiaoxi_tan, 1000);
+        });
+        function xiaoxi_close() {
+            var seeNumUrl = "/index/index/xiaoxi_close.html";
+            $.ajax({
+                type : "POST",
+                url : seeNumUrl,
+                data: {},
+                dataType : "json",
+            });
+            $(".alert_windows1").hide();
+        }
+        if(uid){
+        //通知弹窗
+            function tongzhi_tan() {
+                var seeNumUrl = "/index/index/tongzhi_tan.html";
+                $.ajax({
+                    type : "POST",
+                    url : seeNumUrl,
+                    data: {},
+                    dataType : "json",
+                    success : function(result){
+                        if(result['code'] != 0){
+                            $(".alert_windows2").show();
+                            document.getElementById("tongzhi_tan").innerHTML = result['code'];
+                        }
+                    },
+                    error:function(){
+                        //alert();
+                    }
+                });
+            }
+        }
+        $(function(){
+            setInterval(tongzhi_tan, 1000);
+        });
+        function tongzhi_close() {
+            var seeNumUrl = "/index/index/tongzhi_close.html";
+            $.ajax({
+                type : "POST",
+                url : seeNumUrl,
+                data: {},
+                dataType : "json",
+            });
+            $(".alert_windows2").hide();
+            setTimeout(function(){
+                location.reload();
+            },100);
+        }
+        
+        function shiming_alert(txt,txt1){
+            $(".hscysm-model-title").text(txt1);
+            hsycms.alert('alert',txt,function(){
+                hsycms.close('alert');
+                location.reload();
+                location.href="/index/my/shiming.html"
+            })
+        }
+    </script></head><body class="index_body"><!--公告弹窗--><div class="alert_windows"><span style="height:25%;overflow:auto;"><p>流量联盟 招商中</p>
+
+<p>欢迎各大企业入住流量联盟</p>
+
+<p>广告位多多&nbsp;&nbsp;</p>
+
+<p>VIP3-4-5-6-7都可以使用任务机器人一键完成</p>
+
+<p>用户问题请加入QQ官方群1168088750<br>
+<br>
+<br>
+<br>
+<br>
+&nbsp;</p></span></div><!--标题内容--><div class="index_bt"><p class="index_hyxx">Hi,欢迎来到流量联盟</p></div><!--头部余额内容--><div class="index_ye"><p class="index_ztsy">账户余额</p><p class="index_ztsy_dd">￥0</p><a class="index_tssy" href="vip.html">提升收益</a><div class="index_zhyehsy"><p class="index_syyys">在线用户：731120</p><p class="index_syyys">全局收益：<span id="xnshouyi">￥198521.58</span></p></div></div><!--首页导航内容--><div class="index_xnav"><ui><a href="index1.html"><li><img src="static/picture/7bd934e40629ab0d.png"><p>APP下载</p></li></a><a href="javascript:void(0)" onclick="hongbao()"><li><img src="static/picture/988c36cd35fcb936.png"><p>每日红包</p></li></a><a href="login.html"><li><img src="static/picture/3edded41415b8e58.png"><p>我的团队</p></li></a><a href="login.html"><li><img src="static/picture/59dc91cc7c64b984.png"><p>新手指南</p></li></a><!----><!-- 		--></ui></div><!--	e-bay易贝 （https://www.ebay.com）--><!--amazon亚马逊（https://www.amazon.com）--><!--lazada 来赞达（https://www.lazada.com.my）--><!--shopee虾皮购物（https://shopee.com.my）--><!--淘宝（https://taobao.com）--><!--天猫（https://www.tmall.com）--><!--京东（https://www.jd.com)--><!--拼多多 （https://m.pinduoduo.com）--><!--广告--><style>
+		.dd{
+			padding: 0.4rem 0.6rem;
+			margin:  0.4rem 0.5rem;
+			/*border:solid 1px red;*/
+			background: #098eff;
+			color: #fff;
+			font-size: bold;
+			border-radius: 0.2rem;
+		}
+	</style><div class="ads" style="height:9rem"><h3>商业联盟 :</h3><div style="display:flex;flex-wrap:wrap ;"><!--<button class="dd" >--><!--	 <a style="color:#fff"  href="https://www.ebay.com">E-bay</a>--><!--</button>--><a href="javascript:;" style="width:25%;height:4rem"><img src="static/picture/ebay.jpg" style="width:4rem;height:3rem"></a><!--<button class="dd" >--><!--	 <a style="color:#fff"  href="https://www.amazon.com">Amazon</a>--><!--</button>--><a href="javascript:;" style="width:25%;height:4rem"><img src="static/picture/ama.jpg" style="width:4rem;height:3rem"></a><!--<button class="dd" >--><!--	 <a style="color:#fff"  href="https://www.lazada.com.my">Lazada</a>--><!--</button>--><a href="javascript:;" style="width:25%;height:4rem"><img src="static/picture/laz.jpg" style="width:4rem;height:3rem"></a><!--<button class="dd" >--><!--	 <a style="color:#fff"  href="https://shopee.com.my">shopee</a>--><!--</button>--><a href="javascript:;" style="width:25%;height:4rem"><img src="static/picture/shop.jpg" style="width:4rem;height:3rem"></a><!--<button class="dd" >--><!--	 <a style="color:#fff"  href="https://taobao.com">淘宝</a>--><!--</button>--><a href="javascript:;" style="width:25%;height:4rem"><img src="static/picture/tb.jpg" style="width:4rem;height:3rem"></a><!--<button class="dd" >--><!--	 <a style="color:#fff"  href="https://www.tmall.com">天猫</a>--><!--</button>--><a href="javascript:;" style="width:25%;height:4rem"><img src="static/picture/tm.jpg" style="width:4rem;height:3rem"></a><!--<button class="dd" >--><!--	 <a style="color:#fff"  href="https://www.jd.com">京东</a>--><!--</button>--><a href="javascript:;" style="width:25%;height:4rem"><img src="static/picture/jd.jpg" style="width:4rem;height:3rem"></a><!--<button class="dd" >--><!--	 <a style="color:#fff"  href="https://m.pinduoduo.com">拼多多</a>--><!--</button>--><a href="javascript:;" style="width:25%;height:4rem"><img src="static/picture/pdd.jpg" style="width:4rem;height:3rem"></a></div><!--<a href="https://www.ebay.com">E-bay</a>--><!----><!--    <a href="/index/my/invite.html"><img src="/upload/525e3bf3938229d3/a7c9cd0e5ce2cdf3.jpg"style="width:1rem;height1rem" alt="" /></a>--><!----></div><!--首页宣传视频--><div class="index_video"><video width="320" height="240" controls="controls" autoplay="autoplay"><source src="/sy.mp4" type="video/mp4"></video></div><!--首页任务大厅--><h3 class="profile-bg">任务大厅</h3><div class="index_task"><ul><li style="background-image:url(http://liulianglianmeng.cn.com/upload/good/default.png);background-color:hsla(180, 4%, 95%, .6);height:163px;border-radius:20px" onclick='level(0)'><div class="task_level"><div class="text_level" style='margin-left:7px;margin-top:10px'>青铜会员专属通道</div></div><div class="task_name"><div class="text_name" style='margin-left:7px;color:#969696;font-size:12px'>任务数量 &nbsp;1&nbsp; 单/天</div><img src="static/picture/76345448ab20f43f.png" style='margin-left:7px;margin-top:5px' width='160px' height='100px'></div></li><li style="background-image:url(http://liulianglianmeng.cn.com/upload/good/default.png);background-color:hsla(180, 4%, 95%, .6);height:163px;border-radius:20px" onclick='level(1)'><div class="task_level"><div class="text_level" style='margin-left:7px;margin-top:10px'>-VIP1专属通道</div></div><div class="task_name"><div class="text_name" style='margin-left:7px;color:#969696;font-size:12px'>任务数量 &nbsp;5&nbsp; 单/天</div><img src="static/picture/e9aa3edd77a36cd9.png" style='margin-left:7px;margin-top:5px' width='160px' height='100px'></div></li><li style="background-image:url(http://liulianglianmeng.cn.com/upload/good/default.png);background-color:hsla(180, 4%, 95%, .6);height:163px;border-radius:20px" onclick='level(2)'><div class="task_level"><div class="text_level" style='margin-left:7px;margin-top:10px'>-VIP2专属通道</div></div><div class="task_name"><div class="text_name" style='margin-left:7px;color:#969696;font-size:12px'>任务数量 &nbsp;15&nbsp; 单/天</div><img src="static/picture/abc6d6c2756badb6.png" style='margin-left:7px;margin-top:5px' width='160px' height='100px'></div></li><li style="background-image:url(http://liulianglianmeng.cn.com/upload/good/default.png);background-color:hsla(180, 4%, 95%, .6);height:163px;border-radius:20px" onclick='level(3)'><div class="task_level"><div class="text_level" style='margin-left:7px;margin-top:10px'>-VIP3专属通道</div></div><div class="task_name"><div class="text_name" style='margin-left:7px;color:#969696;font-size:12px'>任务数量 &nbsp;70&nbsp; 单/天</div><img src="static/picture/d571bb8d9c2565ce.png" style='margin-left:7px;margin-top:5px' width='160px' height='100px'></div></li><li style="background-image:url(http://liulianglianmeng.cn.com/upload/good/default.png);background-color:hsla(180, 4%, 95%, .6);height:163px;border-radius:20px" onclick='level(4)'><div class="task_level"><div class="text_level" style='margin-left:7px;margin-top:10px'>-VIP4专属通道</div></div><div class="task_name"><div class="text_name" style='margin-left:7px;color:#969696;font-size:12px'>任务数量 &nbsp;130&nbsp; 单/天</div><img src="static/picture/e424b18fb6e98781.png" style='margin-left:7px;margin-top:5px' width='160px' height='100px'></div></li><li style="background-image:url(http://liulianglianmeng.cn.com/upload/good/default.png);background-color:hsla(180, 4%, 95%, .6);height:163px;border-radius:20px" onclick='level(5)'><div class="task_level"><div class="text_level" style='margin-left:7px;margin-top:10px'>-VIP5专属通道</div></div><div class="task_name"><div class="text_name" style='margin-left:7px;color:#969696;font-size:12px'>任务数量 &nbsp;210&nbsp; 单/天</div><img src="static/picture/d1fca5ce146010f4.png" style='margin-left:7px;margin-top:5px' width='160px' height='100px'></div></li><li style="background-image:url(http://liulianglianmeng.cn.com/upload/good/default.png);background-color:hsla(180, 4%, 95%, .6);height:163px;border-radius:20px" onclick='level(6)'><div class="task_level"><div class="text_level" style='margin-left:7px;margin-top:10px'>-VIP6专属通道</div></div><div class="task_name"><div class="text_name" style='margin-left:7px;color:#969696;font-size:12px'>任务数量 &nbsp;300&nbsp; 单/天</div><img src="http://zan.hongyiku.cn.com/upload/9391f9b30a1eb044/89cfc07b857c71d7.png" style='margin-left:7px;margin-top:5px' width='160px' height='100px'></div></li><li style="background-image:url(http://liulianglianmeng.cn.com/upload/good/default.png);background-color:hsla(180, 4%, 95%, .6);height:163px;border-radius:20px" onclick='level(7)'><div class="task_level"><div class="text_level" style='margin-left:7px;margin-top:10px'>-VIP7专属通道</div></div><div class="task_name"><div class="text_name" style='margin-left:7px;color:#969696;font-size:12px'>任务数量 &nbsp;500&nbsp; 单/天</div><img src="http://zan.hongyiku.cn.com/upload/e4afe8da90d40432/dd2731f64e3704df.png" style='margin-left:7px;margin-top:5px' width='160px' height='100px'></div></li></ul></div><!--红包弹窗--><div onclick="lingqu()" class="opacity" style="display:none;"><img src="http://liulianglianmeng.cn.com/static/images/meiri_hb1.png"><span id="hb_price"></span></div><div class="red" style="display:none;"><img src="http://liulianglianmeng.cn.com/static/images/meiri_hb.png"></div><!--签到弹窗--><div id="dialogBg"></div><div class="index_qiandao qd_tan1 claseDialogBtn animated" id="dialog"><div><span class="span1">恭喜获得￥1</span><span class="span2">2021-11-01</span></div></div><div style="height:4rem;"></div><footer><a href="login.html" style="position: fixed;right: 1.2rem;bottom:7rem;width:3rem;height:3rem;background: url('http://liulianglianmeng.cn.com/static/kf.png');no-repeat;background-size: 100% 100%;"></a><a href="javascript:;" style="position: fixed;right: 1.2rem;bottom:4rem;width:3rem;height:3rem;background: url('http://liulianglianmeng.cn.com/static/app.png');no-repeat;background-size: 100% 100%;"></a><ul><a href=""><li><img src="http://liulianglianmeng.cn.com/static/images/menu_home.png" alt=""><span>首页</span></li></a><a href="index.html"><li><img src="http://liulianglianmeng.cn.com/static/images/menu_task.png" alt=""><span>任务</span></li></a><a href="vip.html"><li><img src="http://liulianglianmeng.cn.com/static/images/menu_vip.png" alt=""><span>会员</span></li></a><a href="task_apply1.html"><li><img src="http://liulianglianmeng.cn.com/static/images/menu_order.png" alt=""><span>记录</span></li></a><a href="login.html"><li><img src="http://liulianglianmeng.cn.com/static/images/menu_user.png" alt=""><span>我的</span></li></a></ul></footer><script type="text/javascript">
+        //--排行--
+        function AutoScroll(obj) {
+            $(obj).find("ul:first").animate({
+                marginTop: "-22px"
+            },
+            500,
+            function () {
+                $(this).css({
+                    marginTop: "0px"
+                }).find("li:first").appendTo(this);
+            });
+        }
+        
+        function suo() {
+            $('body').toast({
+    			position:'fixed',
+    			content:"您目前级别无法解锁，请升级后进行操作",
+    			duration:3000,
+    			isCenter:false,
+    			background:'rgba(000,0,0,0.5)',
+    			animateIn:'bounceIn-hastrans',
+    			animateOut:'bounceOut-hastrans',
+    		});
+    		setTimeout(function(){
+                location.href="/index/my/vip.html"
+            },2000);
+        }
+    
+        $(document).ready(function () {
+            setInterval('AutoScroll("#demo")', 2000);
+            setInterval('j()', 1500);
+        });
+    
+        function j() {
+    
+            var r = [7, 12, 19, 23, 29, 37, 61, 75, 98, 136, 172, 132, 177, 198, 222];
+            var x1 = Math.ceil(Math.random()*14) + 1;
+            var num1 = r[x1];
+            var money1 = Math.floor(num1 * 8.8 * 100) / 100;
+    
+            var randomNum = Math.floor(Math.random() * 90);
+            $("#tx1").attr('src', "/static/phimg/" + randomNum + ".png");
+            $("#t11").text(noPassByName(getMoble()));
+            $("#t21").text(num1);
+            $("#t31").text(money1);
+    
+            var x2 = Math.ceil(Math.random()*14) + 1;
+            var num2 = r[x2];
+            var money2 = Math.floor(num2 * 8.8 * 100) / 100;
+    
+            var randomNum2 = Math.floor(Math.random() * 90);
+            $("#tx2").attr('src', "/static/phimg/" + randomNum2 + ".png");
+            $("#t12").text(noPassByName(getMoble()));
+            $("#t22").text(num2);
+            $("#t32").text(money2);
+    
+        }
+    
+        function getMoble() {
+    
+            var prefixArray = new Array("130", "131", "132", "133", "135", "137", "138", "170", "187", "189");
+    
+            var i = parseInt(10 * Math.random());
+    
+            var prefix = prefixArray[i];
+    
+            for (var j = 0; j < 8; j++) {
+    
+                prefix = prefix + Math.floor(Math.random() * 10);
+    
+            }
+    
+            return prefix;
+    
+        }
+    
+        function noPassByName(str) {
+            if (null != str && str != undefined) {
+                if (str.length <= 3) {
+                    return "*" + str.substring(1, str.length);
+                } else if (str.length > 3 && str.length <= 6) {
+                    return "**" + str.substring(2, str.length);
+                } else if (str.length > 6) {
+                    return str.substring(0, 2) + "****" + str.substring(6, str.length)
+                }
+            } else {
+                return "";
+            }
+        }
+        function level(id){
+            location.href="/index/task/type.html?id="+id;
+        }
+	   // --公告弹窗--
+		$(function(){
+		  //  	var winWid = $(window).width()/2 - $('.alert_windows').width()/2;
+				// var winHig = $(window).height()/2 - $('.alert_windows').height()/2;
+				// $(".alert_windows").css({"left":winWid,"top":-winHig*2});	//自上而下
+				// $(".alert_windows").show();
+				// $(".alert_windows").animate({"left":winWid,"top":winHig},1000);
+				// $(".alert_windows").click(function(){
+				// 	//$.cookie("isClose",'yes',{ expires:1/86400});	//测试十秒
+				// 	$.cookie("isClose",'yes',{ expires:1});		//一天
+				// 	$('.alert_windows').hide();
+				// });
+			if($.cookie("isClose") != 'yes'){
+				var winWid = $(window).width()/2 - $('.alert_windows').width()/2;
+				var winHig = $(window).height()/2 - $('.alert_windows').height()/2;
+				$(".alert_windows").css({"left":winWid,"top":-winHig*2});	//自上而下
+				$(".alert_windows").show();
+				$(".alert_windows").animate({"left":winWid,"top":winHig},1000);
+				$(".alert_windows").click(function(){
+					//$.cookie("isClose",'yes',{ expires:1/86400});	//测试十秒
+					$.cookie("isClose",'yes',{ expires:1});		//一天
+					$('.alert_windows').hide();
+				});
+			}
+		});
+
+        //--签到弹窗--
+        $(document).ready(function(){
+        	$(".red").click(function(){
+        		$(this).addClass("shake");
+        		setTimeout(function(){
+        			$(".red").removeClass("shake");
+        			$('.red').hide();
+        			$('.opacity').show();
+        		},2000);
+        	});
+        });
+    
+        var w,h,className;
+        function getSrceenWH(){
+        	w = $(window).width();
+        	h = $(window).height();
+        	$('#dialogBg').width(w).height(h);
+        }
+        
+        window.onresize = function(){  
+        	getSrceenWH();
+        }  
+        $(window).resize();  
+        
+        $(function(){
+        	getSrceenWH();
+    
+        	//关闭弹窗
+        	$('.claseDialogBtn').click(function(){
+        		$('#dialogBg').fadeOut(300,function(){
+        			$('#dialog').addClass('bounceOutUp').fadeOut();
+        		});
+        	});
+        });    
+    
+        //获取收益
+        function queryTX() {
+            var seeNumUrl = "/index/index/xnshouyi.html";
+            var status = 0;
+            $.ajax({
+                type : "POST",
+                url : seeNumUrl,
+                data: {status:status},
+                dataType : "json",
+                success : function(result){
+                    if(result['code'] > "0"){
+                        //alert(result['code']);
+                        document.getElementById("xnshouyi").innerHTML = result['code'];
+                    }
+                },
+                error:function(){
+                    //alert();
+                }
+            });
+        }
+        // $(function(){
+        //     setInterval(queryTX, 5000);
+        // });
+        
+        //--签到弹窗--
+        function qiandao(){
+            var loading = null;
+            var num = '1';
+            $.ajax({
+                url:"/index/index/qiandao.html",
+                data:{num:num},
+                type:'POST',
+                beforeSend:function(){
+                    loading = $(document).dialog({
+                        type : 'notice',
+                        infoIcon: '/static/images/loading.gif',
+                        infoText: "正在加载中",
+                        autoClose: 0
+                    });
+                },
+                success:function(res){
+                    //loading.close();
+                    if(res.code==0){
+                        loading.close();
+                    	//显示弹框
+                		className = $(this).attr('class');
+                		$('#dialogBg').fadeIn(300);
+                		$('#dialog').removeAttr('class').addClass('index_qiandao qd_tan1 animated '+className+'').fadeIn();
+                    }else{
+                        loading.close();
+                        if(res.info){
+                            $('body').toast({
+                    			position:'fixed',
+                    			content:res.info,
+                    			duration:3000,
+                    			isCenter:true,
+                    			background:'rgba(000,0,0,0.5)',
+                    			animateIn:'bounceIn-hastrans',
+                    			animateOut:'bounceOut-hastrans',
+                    		});
+                        }else{
+                            $('body').toast({
+                    			position:'fixed',
+                    			content:"网络不太稳定,请您在信号较好的地方再试!",
+                    			duration:3000,
+                    			isCenter:true,
+                    			background:'rgba(000,0,0,0.5)',
+                    			animateIn:'bounceIn-hastrans',
+                    			animateOut:'bounceOut-hastrans',
+                    		});
+                        }
+                    }
+                },
+                error:function (data) {
+                    loading.close();
+                }
+            });
+        }
+        
+        //--签到弹窗--
+        function qdguanbi(){
+            $('body').toast({
+    			position:'fixed',
+    			content:"签到功能未开启!",
+    			duration:3000,
+    			isCenter:true,
+    			background:'rgba(000,0,0,0.5)',
+    			animateIn:'bounceIn-hastrans',
+    			animateOut:'bounceOut-hastrans',
+    		});
+        }
+        
+        //--红包--
+        function hongbao(){
+            var loading = null;
+            $.ajax({
+                url:"/index/index/hongbao.html",
+                data:{},
+                type:'POST',
+                beforeSend:function(){
+                    loading = $(document).dialog({
+                        type : 'notice',
+                        infoIcon: '/static/images/loading.gif',
+                        infoText: "正在加载中",
+                        autoClose: 0
+                    });
+                },
+                success:function(res){
+                    //loading.close();
+                    if(res.code==0){
+                        loading.close();
+                    	//显示弹框
+                		$('.red').show();
+                		$("#hb_price").text(res.info);
+                    }else{
+                        loading.close();
+                        if(res.info){
+                            $('body').toast({
+                    			position:'fixed',
+                    			content:res.info,
+                    			duration:3000,
+                    			isCenter:true,
+                    			background:'rgba(000,0,0,0.5)',
+                    			animateIn:'bounceIn-hastrans',
+                    			animateOut:'bounceOut-hastrans',
+                    		});
+                        }else{
+                            $('body').toast({
+                    			position:'fixed',
+                    			content:"网络不太稳定,请您在信号较好的地方再试!",
+                    			duration:3000,
+                    			isCenter:true,
+                    			background:'rgba(000,0,0,0.5)',
+                    			animateIn:'bounceIn-hastrans',
+                    			animateOut:'bounceOut-hastrans',
+                    		});
+                        }
+                    }
+                },
+                error:function (data) {
+                    loading.close();
+                }
+            });
+        }
+        
+
+        //--红包--
+        function lingqu(){
+            var loading = null;
+            var hb_price = $("#hb_price").text()
+            $.ajax({
+                url:"/index/index/lingqu.html",
+                data:{hb_price:hb_price},
+                type:'POST',
+                beforeSend:function(){
+                    loading = $(document).dialog({
+                        type : 'notice',
+                        infoIcon: '/static/images/loading.gif',
+                        infoText: "正在加载中",
+                        autoClose: 0
+                    });
+                },
+                success:function(res){
+                    //loading.close();
+                    if(res.code==0){
+                        loading.close();
+                        $('body').toast({
+                			position:'fixed',
+                			content:res.info,
+                			duration:3000,
+                			isCenter:true,
+                			background:'rgba(000,0,0,0.5)',
+                			animateIn:'bounceIn-hastrans',
+                			animateOut:'bounceOut-hastrans',
+                		});
+                		setTimeout(function(){
+                			$('.opacity').hide();
+                		},3000);
+                    }else{
+                        loading.close();
+                        if(res.info){
+                            $('body').toast({
+                    			position:'fixed',
+                    			content:res.info,
+                    			duration:3000,
+                    			isCenter:true,
+                    			background:'rgba(000,0,0,0.5)',
+                    			animateIn:'bounceIn-hastrans',
+                    			animateOut:'bounceOut-hastrans',
+                    		});
+                    		setTimeout(function(){
+                    			$('.opacity').hide();
+                    		},3000);
+                        }else{
+                            $('body').toast({
+                    			position:'fixed',
+                    			content:"网络不太稳定,请您在信号较好的地方再试!",
+                    			duration:3000,
+                    			isCenter:true,
+                    			background:'rgba(000,0,0,0.5)',
+                    			animateIn:'bounceIn-hastrans',
+                    			animateOut:'bounceOut-hastrans',
+                    		});
+                		    setTimeout(function(){
+                    			$('.opacity').hide();
+                    		},3000);
+                        }
+                    }
+                },
+                error:function (data) {
+                    loading.close();
+                }
+            });
+        }
+    </script></body></html>
