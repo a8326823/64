@@ -108,7 +108,7 @@ class UserTaskService extends AbstractController
             
             //$this->addTaskRebate($user_task, $user);
             
-            // 任务收入 创建用户账单
+        // 任务收入 创建用户账单
         $this->container->get(UserBillDAO::class)->create([
             'user_id'        => $user->id,
             'type'           => 1,

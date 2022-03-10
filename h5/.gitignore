@@ -1,0 +1,15 @@
+.buildpath
+.settings/
+.project
+*.patch
+.idea/
+.git/
+unpackage/dist
+unpackage/cache
+unpackage/debug
+unpackage/release
+.DS_Store
+node_modules/
+uni_modules/
+package-lock.json
+yarn.lock

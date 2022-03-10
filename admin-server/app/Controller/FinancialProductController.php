@@ -8,7 +8,7 @@ declare (strict_types=1);
  */
 
 namespace App\Controller;
-
+use App\Service\DAO\FinancialProductDAO;
 
 
 use Hyperf\HttpServer\Annotation\Controller;

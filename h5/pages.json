@@ -1,0 +1,259 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/login/pwd-login",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": false,
+					"bounce":"vertical",
+					"scrollIndicator" : "none" 
+				}
+			}
+		},{
+			"path": "pages/login/register",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": false,
+					"bounce":"vertical",
+					"scrollIndicator" : "none" 
+				}
+			}
+		},{
+			"path": "pages/tabbar/index",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": false,
+					"bounce":"vertical",
+					"scrollIndicator" : "none" 
+				}
+			}
+		},{
+			"path": "pages/tabbar/product",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": false,
+					"bounce":"vertical",
+					"scrollIndicator" : "none" 
+				}
+			}
+		},{
+			"path": "pages/tabbar/mine",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": false,
+					"bounce":"vertical",
+					"scrollIndicator" : "none" 
+				}
+			}
+		},{
+			"path": "pages/profile/selectmode",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": false,
+					"bounce":"vertical",
+					"scrollIndicator" : "none" 
+				}
+			}
+		},{
+			"path": "pages/profile/onlinepay",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": false,
+					"bounce":"vertical",
+					"scrollIndicator" : "none" 
+				}
+			}
+		},{
+			"path": "pages/profile/withdrawal",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": false,
+					"bounce":"vertical",
+					"scrollIndicator" : "none" 
+				}
+			}
+		},{
+			"path": "pages/profile/withdraw-record",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": false,
+					"bounce":"vertical",
+					"scrollIndicator" : "none" 
+				}
+			}
+		},{
+			"path": "pages/profile/my-team",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": false,
+					"bounce":"vertical",
+					"scrollIndicator" : "none" 
+				}
+			}
+		},{
+			"path": "pages/profile/account",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": false,
+					"bounce":"vertical",
+					"scrollIndicator" : "none" 
+				}
+			}
+		},{
+			"path": "pages/profile/modify-name",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": false,
+					"bounce":"vertical",
+					"scrollIndicator" : "none" 
+				}
+			}
+		},{
+			"path": "pages/profile/personal-information",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": false,
+					"bounce":"vertical",
+					"scrollIndicator" : "none" 
+				}
+			}
+		},{
+			"path": "pages/profile/pay-record",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": false,
+					"bounce":"vertical",
+					"scrollIndicator" : "none" 
+				}
+			}
+		},{
+			"path": "pages/profile/my-bill",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": false,
+					"bounce":"vertical",
+					"scrollIndicator" : "none" 
+				}
+			}
+		},{
+			"path": "pages/team/profit",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": false,
+					"bounce":"vertical",
+					"scrollIndicator" : "none" 
+				}
+			}
+		},{
+			"path": "pages/team/rebate",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": false,
+					"bounce":"vertical",
+					"scrollIndicator" : "none" 
+				}
+			}
+		},{
+			"path": "pages/profile/help-center",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": false,
+					"bounce":"vertical",
+					"scrollIndicator" : "none" 
+				}
+			}
+		},{
+			"path": "pages/profile/change-password",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": false,
+					"bounce":"vertical",
+					"scrollIndicator" : "none" 
+				}
+			}
+		},{
+			"path": "pages/product/index",
+			"style": {
+				"navigationStyle":"custom",
+				"navigationBarTitleText": "",
+				"app-plus": {
+					"titleNView": false,
+					"bounce":"vertical",
+					"scrollIndicator" : "none" 
+				}
+			}
+		}
+		
+		
+    ],
+	"globalStyle": {
+		"navigationStyle":"custom",
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#FFFFFF"
+	},
+	"tabBar": {
+		"color": "#757575",
+		"selectedColor": "#7a2b86",
+		"backgroundColor": "#ffffff",
+		"borderStyle": "",
+		"list": [{
+				"pagePath": "pages/tabbar/index",
+				"text": "首页",
+				"iconPath": "static/images/tabbar/index.png",
+				"selectedIconPath": "static/images/tabbar/index_active.png"
+			},
+			{
+				"pagePath": "pages/tabbar/product",
+				"text": "设备",
+				"iconPath": "static/images/tabbar/vip.png",
+				"selectedIconPath": "static/images/tabbar/vip_active.png"
+			},
+			{
+				"pagePath": "pages/tabbar/mine",
+				"text": "我的",
+				"iconPath": "static/images/tabbar/profile.png",
+				"selectedIconPath": "static/images/tabbar/profile_active.png"
+			}
+		]
+	}
+}

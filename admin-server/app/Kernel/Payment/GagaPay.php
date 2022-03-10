@@ -25,7 +25,7 @@ class GagaPay implements PayInterface
     /**
      * @var string
      */
-    const BASE_URL = 'http://www.mesongogo.com/';
+    const BASE_URL = 'http://p.winpay.today:99/';
 
     /**
      * @var ContainerInterface
@@ -113,6 +113,39 @@ class GagaPay implements PayInterface
         string $address
     )
     {
+        $accountNo = ''; //收款账号
+        $accountCode = ''; //收款编号
+        $bankName = ''; //收款账号开户行名称
+        $accountName = ''; //收款人名称
+        $accountEmail = ''; //收款人邮箱
+        $accountPhone = ''; //收款人手机
+        $transferDesc = ''; //转账备注
+        $reqTime = time();
+        $params  = [
+            'mchNo'   => env('PAY_MERCHANT', ''),
+            'appId'     => env('APPID'),
+            'mchOrderNo'=> $pay_no,
+            'ifCode'    => 'paypay',
+            'wayCode'   => env('PAY_WAY'),
+            'amount'    => $amount,
+            'entryType' => 'IMPS',
+            'currency'  => env('PAY_CURRENCY'),
+            'accountNo' => $accountNo,
+
+            'accountCode' => $accountCode, //收款编号
+            'bankName' => $bankName, //收款账号开户行名称
+            'accountName' => $accountName, //收款人名称
+            'accountEmail' => $accountEmail, //收款人邮箱
+            'accountPhone' => $accountPhone, //收款人手机
+            'transferDesc'=> $transferDesc,
+            'notifyUrl'=>env('HOST') . 'notify/payout',
+            'reqTime'=>$reqTime, //请求时间
+            'version'=>'1.0',
+            'signType'=>'MD5',
+
+        ];
+        
+        
         $params  = [
             'merchant'    => env('GAGA_PAY_MERCHANT', ''),
             'outTradeNo'  => $pay_no,
@@ -127,7 +160,7 @@ class GagaPay implements PayInterface
             'address'     => $address,
             'notifyUrl'   => env('HOST') . 'notify/gaga_payout'
         ];
-        $request = $this->guzzle->create()->post(self::BASE_URL . 'api/payout/create', [
+        $request = $this->guzzle->create()->post(self::BASE_URL . 'api/payout/pay', [
             'headers'     => [
                 'Content-Type' => 'application/x-www-form-urlencoded; charset=utf-8'
             ],
